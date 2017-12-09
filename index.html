@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="libs/normalize.css">
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--*************** start menu bar *****************-->
+    <div class="mobile-menu visible-xs">
+        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+    </div>
+    <aside class="menu flex pull-left hidden-xs">
+       <div class="logo col-xs-12 flex pointer">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+       </div>
+       <hr>
+       <div class="dash-board col-xs-12 flex pointer">
+           <div class="dash-board-logo flex"><i class="fa fa-desktop" aria-hidden="true"></i>
+           </div>
+           <p>Dashboard</p>
+       </div>
+       <hr>
+       <div class="analytics col-xs-12 flex pointer">
+           <div class="analytics-logo flex">
+               <i class="fa fa-pie-chart" aria-hidden="true"></i>
+           </div>
+           <p>Analystics</p>
+       </div>
+       <hr>
+       <div class="mediaa col-xs-12 flex pointer">
+           <div class="media-logo flex">
+               <i class="fa fa-picture-o" aria-hidden="true"></i>
+           </div>
+           <p>Media</p>
+       </div>
+       <hr>
+       <div class="comments col-xs-12 flex pointer">
+           <div class="comments-logo flex">
+               <i class="fa fa-comments" aria-hidden="true"></i>
+           </div>
+           <p>Comments</p>
+       </div>
+       <hr>
+       <div class="widgets col-xs-12 flex pointer">
+           <div class="widgets-logo felx">
+               <i class="fa fa-square-o" aria-hidden="true"></i>
+           </div>
+           <p>Widgets</p>
+       </div>
+       <hr>
+       <div class="planner col-xs-12 flex pointer">
+           <div class="planner-logo flex">
+               <i class="fa fa-calendar" aria-hidden="true"></i>
+           </div>
+           <p>Planner</p>
+       </div>
+       <hr>
+       <div class="reports col-xs-12 flex pointer">
+           <div class="reports-logo flex">
+               <i class="fa fa-square-o" aria-hidden="true"></i>
+           </div>
+           <p>Reports</p>
+       </div>
+       <hr>
+       <div class="directions col-xs-12 flex pointer">
+           <div class="directions-logo flex">
+               <i class="fa fa-compass" aria-hidden="true"></i>
+           </div>
+           <p>Directions</p>
+       </div> 
+
+    </aside>
+<!--*************** end menu bar *****************-->
+<!--*****************start search**************** -->
+    <section class="search pull-left">
+        <input type="text" placeholder="Search" />
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </section>
+<!--******************end search***************** -->
+<!--******************start profile***************** -->
+    <section class="profile pull-left flex">
+        <div class="profile-info flex col-xs-6">
+            <img src="images/profile.png" alt="profile picture">
+            <p>Welcome,Omar Ehab</p>
+        </div>
+        <div class="messages flex pointer col-xs-2">
+            <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+        </div>
+        <div class="notfications flex pointer col-xs-2">
+            <i class="fa fa-bell fa-2x" aria-hidden="true"></i>
+        </div>
+        <div class="settings flex pointer col-xs-2">
+            <i class="fa fa-cogs fa-2x" aria-hidden="true"></i>
+        </div>
+    </section>
+<!--*******************end profile******************* -->
+<!--******************start logout********************-->
+    <section class="logout pull-left flex">
+        <div class="btn flex">LOGOUT</div>
+    </section>
+<!--******************end logout**********************-->
+<!--******************start dashboard*****************-->
+    <section class="dashboard flex pull-left">
+        <div class="chart col-xs-12">
+            <svg width="700" height="300">
+        <line x1="50" y1="3" x2="50" y2="297" style="stroke:#none;opacity:0.5;stroke-width:1" />
+        <text x="50" y="200" style="fill:#ddd"></text>
+        <polyline points="" style="stroke:#fff;fill:none;stroke-width:2"/>
+        <g style='fill:#9a8b6f;stroke:#fff;stroke-width:2' id="pointsGroup">
+        </g>
+    </svg>
+    <style>
+        circle{transition:all 0.2s ease-in-out;}
+        circle:hover{
+            cursor: pointer;
+            fill:#454138;
+            r:9;
+            stroke-width:4;
+        }
+    </style>
+    <script>
+        var $points = document.querySelector('polyline'),
+            g = document.getElementById('pointsGroup');
+        for (var i = 0; i < 10; i++) {
+            var x = Math.floor(70 * i) + 30,
+                y = Math.floor(Math.random() * (250)) + 25;
+            $points.setAttribute('points', $points.getAttribute('points') + " " + x + ',' + y);
+            g.innerHTML += "<circle id='point_" + i + "' cx='" + x + "' cy='" + y + "' r='7' />";
+        }
+        document.querySelectorAll('circle').forEach(function (circle) {
+            circle.addEventListener('mousemove', showLine, false);
+            circle.addEventListener('mouseover', showLine, false);
+            circle.addEventListener('mouseout', hideLine, false);
+        });
+        function showLine(e) {
+            var line = document.querySelector('line'),
+                x = parseInt(e.currentTarget.getAttribute('cx')),
+                y = parseInt(e.currentTarget.getAttribute('cy')),
+                text = document.querySelector('text');
+            line.setAttribute('x1', x);
+            line.setAttribute('x2', x);
+            line.style.stroke = '#ddd';
+            if (x > 550) {
+                x -= 100;
+            }
+            text.setAttribute('x', x + 15);
+            if (y > 290) {
+                y -= 30;
+            }
+            if (y < 20) {
+                y += 20;
+            }
+            console.log(y);
+            text.setAttribute('y', y);
+            text.textContent = e.currentTarget.id;
+        }
+        function hideLine() {
+            var line = document.querySelector('line');
+            line.style.stroke = 'none';
+            var text = document.querySelector('text');
+            text.textContent = "";
+        }
+    </script>
+        </div>
+        <div class="recent-activity col-xs-12 flex">
+            <p>Recent Activity</p>
+            <p>See All
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </p>
+        </div>
+        <div class="dashboard-info col-xs-12 flex">
+            <div class="activty col-xs-12 flex">
+                <div>
+                    <h3>Green Dots POS Money Load</h3>
+                    <p class="des">Funds loaded through Green Dot load network</p>
+                </div>
+                <div class="money">
+                    <h3 class="green">$834,19</h3>
+                    <p class="date">01/09/13</p>
+                </div>
+            </div>
+            <div class="activty col-xs-12 flex">
+                <div>
+                    <h3>POS Signature Purchase</h3>
+                    <p class="des">SMOKERS WORLD II, LAS VEGAS, NV, USA</p>
+                </div>
+                <div class="money">
+                    <h3 class="red">$450,39</h3>
+                    <p class="date">01/07/13</p>
+                </div>
+            </div>
+            <div class="activty col-xs-12 flex">
+                <div>
+                    <h3>Load Money</h3>
+                    <p class="des">Funds Transfered From Bank Acount *5075</p>
+                </div>
+                <div class="money">
+                    <h3 class="green">$188,19</h3>
+                    <p class="date">01/05/13</p>
+                </div>
+            </div>
+            <div class="activty col-xs-12 flex">
+                <div>
+                    <h3>POS Signature Purchase</h3>
+                    <p class="des">VONS STORE 2511, HENDERSON, NV, USA</p>
+                </div>
+                <div class="money">
+                    <h3 class="red">$7,19</h3>
+                    <p class="date">01/07/13</p>
+                </div>
+            </div>
+            <div class="activty col-xs-12 flex">
+                <div>
+                    <h3>Load Money</h3>
+                    <p class="des">Funds Transfered From Bank Acount *5075</p>
+                </div>
+                <div class="money">
+                    <h3 class="green">$188,19</h3>
+                    <p class="date">01/05/13</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--******************end dashboard*******************-->
+<!--******************start Balance*******************-->
+    <section class="balance pull-left">
+        <div class="word col-xs-12">Balance</div>
+        <div class="num-logo col-xs-12 flex">
+            <h2>$14,679</h2>
+            <img src="images/logo.png" alt="logo">
+        </div>
+    </section>
+<!--******************end Balance*********************-->
+<!--*****************start Quick Links****************-->
+    <section class="quick-links pull-left">
+        <div class="quick col-xs-12">
+            <h3>Quick Links</h3>
+            <div class="arrow-down"></div>
+        </div>
+        <div class="col-xs-12 flex pointer">
+           <h4>New Tasks</h4>
+           <i class="fa fa-bookmark" aria-hidden="true"></i> 
+        </div>
+        <div class="col-xs-12 flex pointer">
+            <h4>Activity</h4>
+            <i class="fa fa-mouse-pointer" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-12 flex pointer">
+            <h4>Parameters</h4>
+            <i class="fa fa-cog" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-12 flex pointer">
+            <h4>My Cards</h4>
+            <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-12 flex pointer">
+            <h4>Users</h4>
+            <i class="fa fa-user" aria-hidden="true"></i>
+        </div>
+    </section>
+<!--*****************end Quick Links****************-->
+<!--*****************start form****************-->
+    <section class="form pull-left">
+        <div class="customer-sup col-xs-12">
+            <h3>Customer Support</h3>
+            <div class="arrow-down-orange"></div>
+        </div>
+        <div class="support-form col-xs-12">
+                <form action="">
+                    <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email">
+                    <textarea placeholder="Comments"></textarea>
+                    <input type="submit" value="Send" class="pull-right">
+                </form>
+            </div>
+    </section>
+<!--*****************end form****************-->
+
+
+<script src="libs/jquery.min.js"></script>
+<script src="libs/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
